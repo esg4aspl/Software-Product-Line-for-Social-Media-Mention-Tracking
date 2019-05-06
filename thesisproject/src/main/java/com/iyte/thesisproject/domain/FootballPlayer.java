@@ -2,40 +2,40 @@ package com.iyte.thesisproject.domain;
 
 import java.util.List;
 
-import com.iyte.thesisproject.enums.Foot;
-import com.iyte.thesisproject.enums.FootballPosition;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "FootballPlayers")
 public class FootballPlayer extends Player{
 
-	private FootballPosition posiiton;
-	private Foot foot;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	public ObjectId _id;
+		
 	private int totalGoal;
 	private int totalAssist;
-	
-	public FootballPlayer(String name, List<SocialMediaAccount> accounts, double salary, int matchCount,
-			int numberOfMatchWon, int numberOfMatchLost, FootballPosition posiiton, Foot foot, int totalGoal,
-			int totalAssist) {
-		super(name, accounts, salary, matchCount, numberOfMatchWon, numberOfMatchLost);
-		this.posiiton = posiiton;
-		this.foot = foot;
+
+	public FootballPlayer(ObjectId _id, String name, String nationality, 
+						  int age, double salary, int matchCount, int numberOfMatchWon, 
+						  int numberOfMatchLost, int totalGoal, int totalAssist) {
+		
+		super(name, age, nationality, salary, matchCount, numberOfMatchWon, numberOfMatchLost);
+		
+		this._id = _id;
 		this.totalGoal = totalGoal;
 		this.totalAssist = totalAssist;
 	}
-
-	public FootballPosition getPosiiton() {
-		return posiiton;
+	
+	public String get_id() {
+		return _id.toHexString();
 	}
 
-	public void setPosiiton(FootballPosition posiiton) {
-		this.posiiton = posiiton;
-	}
-
-	public Foot getFoot() {
-		return foot;
-	}
-
-	public void setFoot(Foot foot) {
-		this.foot = foot;
+	public void set_id(ObjectId _id) {
+		this._id = _id;
 	}
 
 	public int getTotalGoal() {
@@ -53,13 +53,5 @@ public class FootballPlayer extends Player{
 	public void setTotalAssist(int totalAssist) {
 		this.totalAssist = totalAssist;
 	}
-
-	@Override
-	public void getInfo() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 	
 }

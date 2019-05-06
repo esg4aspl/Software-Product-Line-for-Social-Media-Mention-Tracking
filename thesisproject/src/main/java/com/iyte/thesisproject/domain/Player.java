@@ -2,19 +2,35 @@ package com.iyte.thesisproject.domain;
 
 import java.util.List;
 
-public abstract class Player extends SocialMediaOwner {
 
+public class Player extends TrackedMember{
+
+	private int age;
 	private double salary;
 	private int matchCount;
 	private int numberOfMatchWon;
 	private int numberOfMatchLost;
 	
-	public Player(String name, List<SocialMediaAccount> accounts, double salary, int matchCount, int numberOfMatchWon, int numberOfMatchLost) {
-		super(name, accounts);
+	public Player() {
+
+	}
+	
+	public Player(String name, int age, String nationality, double salary, int matchCount, int numberOfMatchWon, int numberOfMatchLost) {
+		
+		super(name, nationality);
+		this.age = age;
 		this.salary = salary;
 		this.matchCount = matchCount;
 		this.numberOfMatchWon = numberOfMatchWon;
 		this.numberOfMatchLost = numberOfMatchLost;
+	}
+	
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	public double getSalary() {
@@ -47,7 +63,6 @@ public abstract class Player extends SocialMediaOwner {
 
 	public void setNumberOfMatchLost(int numberOfMatchLost) {
 		this.numberOfMatchLost = numberOfMatchLost;
-	}
-	
+	}	
 	
 }

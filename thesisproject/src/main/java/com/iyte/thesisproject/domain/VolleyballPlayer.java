@@ -1,40 +1,36 @@
 package com.iyte.thesisproject.domain;
 
-import java.util.List;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
-import com.iyte.thesisproject.enums.Shoots;
-import com.iyte.thesisproject.enums.VolleyballPosition;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "VolleyballPlayers")
 public class VolleyballPlayer extends Player{
 
-	private VolleyballPosition posiiton;
-	private Shoots shoots;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	public ObjectId _id;
+	
 	private int totalScores;
 
-	public VolleyballPlayer(String name, List<SocialMediaAccount> accounts, double salary, int matchCount,
-			int numberOfMatchWon, int numberOfMatchLost, VolleyballPosition posiiton, Shoots shoots, int totalScores) {
-		super(name, accounts, salary, matchCount, numberOfMatchWon, numberOfMatchLost);
-		this.posiiton = posiiton;
-		this.shoots = shoots;
+	public VolleyballPlayer(ObjectId _id, String name, String nationality, int age, double salary, int matchCount, int numberOfMatchWon, int numberOfMatchLost, int totalScores) {
+		
+		super(name, age, nationality, salary, matchCount, numberOfMatchWon, numberOfMatchLost);
+		this._id = _id;
 		this.totalScores = totalScores;
 	}
 
-	public VolleyballPosition getPosiiton() {
-		return posiiton;
+	public String get_id() {
+		return _id.toHexString();
 	}
 
-	public void setPosiiton(VolleyballPosition posiiton) {
-		this.posiiton = posiiton;
+	public void set_id(ObjectId _id) {
+		this._id = _id;
 	}
-
-	public Shoots getShoots() {
-		return shoots;
-	}
-
-	public void setShoots(Shoots shoots) {
-		this.shoots = shoots;
-	}
-
+	
 	public int getTotalScores() {
 		return totalScores;
 	}
@@ -43,10 +39,4 @@ public class VolleyballPlayer extends Player{
 		this.totalScores = totalScores;
 	}
 
-	@Override
-	public void getInfo() {
-		// TODO Auto-generated method stub
-		
-	}	
-	
 }

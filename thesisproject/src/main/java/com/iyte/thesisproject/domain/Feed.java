@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.bson.types.ObjectId;
 
 @Document(collection = "RSSFeeds")
-public class FeedModel {
+public class Feed {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,11 +22,11 @@ public class FeedModel {
 	private Date PubDate;
 	private String Description;
 
-	public FeedModel() {
+	public Feed() {
 
 	}
 
-	public FeedModel(ObjectId _id, String Title, String Link, Date PubDate, String Description) {
+	public Feed(ObjectId _id, String Title, String Link, Date PubDate, String Description) {
 		this._id = _id;
 		this.Link = Link;
 		this.Title = Title;

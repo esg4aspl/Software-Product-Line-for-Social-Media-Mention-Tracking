@@ -1,24 +1,20 @@
 package com.iyte.thesisproject.domain;
 
 import java.util.Date;
-import java.util.List;
 
-import com.iyte.thesisproject.enums.Branch;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class Club extends SocialMediaOwner{
-
+@Document(collection = "Clubs")
+public class Club extends TrackedMember{
+	
 	private Date foundationYear;
 	private int totalChanpionshipCount;
-	private Branch branch;
-	private List<Person> members;
 	
-	public Club(String name, List<SocialMediaAccount> accounts, Date foundationYear, int totalChanpionshipCount,
-			Branch branch, List<Person> members) {
-		super(name, accounts);
+	public Club(String name, String nationality, Date foundationYear, int totalChanpionshipCount) {
+		
+		super(name, nationality);
 		this.foundationYear = foundationYear;
 		this.totalChanpionshipCount = totalChanpionshipCount;
-		this.branch = branch;
-		this.members = members;
 	}
 
 	public Date getFoundationYear() {
@@ -36,29 +32,5 @@ public class Club extends SocialMediaOwner{
 	public void setTotalChanpionshipCount(int totalChanpionshipCount) {
 		this.totalChanpionshipCount = totalChanpionshipCount;
 	}
-
-	public Branch getBranch() {
-		return branch;
-	}
-
-	public void setBranch(Branch branch) {
-		this.branch = branch;
-	}
-
-	public List<Person> getMembers() {
-		return members;
-	}
-
-	public void setMembers(List<Person> members) {
-		this.members = members;
-	}
-
-	@Override
-	public void getInfo() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 
 }

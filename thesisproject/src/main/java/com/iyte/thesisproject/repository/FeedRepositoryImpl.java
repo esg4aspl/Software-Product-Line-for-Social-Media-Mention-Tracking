@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 
-import com.iyte.thesisproject.domain.FeedModel;
+import com.iyte.thesisproject.domain.Feed;
 
 public class FeedRepositoryImpl implements FeedRepositoryCustom{
 	
@@ -15,13 +15,13 @@ public class FeedRepositoryImpl implements FeedRepositoryCustom{
     MongoTemplate mongoTemplate;
 
 	@Override
-	public List<FeedModel> getFeedsBySearchedName(String name) {
+	public List<Feed> getFeedsBySearchedName(String name) {
 		
 		BasicQuery query1 = new BasicQuery("{ $text: { $search: \"  "+ name + "\" } }");
 		
 		//BasicQuery query1 = new BasicQuery("{ $text: { $search: \"\\\"Fatih Terim\\\"\" } }");
 		
-		List<FeedModel> feeds = mongoTemplate.find(query1, FeedModel.class);
+		List<Feed> feeds = mongoTemplate.find(query1, Feed.class);
 		
 		return feeds;
 	}

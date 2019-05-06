@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.iyte.thesisproject.domain.FeedModel;
+import com.iyte.thesisproject.domain.Feed;
 import com.iyte.thesisproject.service.FeedService;
 
 @RestController
@@ -28,7 +28,7 @@ public class FeedController {
 	
 	 
 	@GetMapping("/allFeeds")
-	public List<FeedModel> getAllFeeds() {
+	public List<Feed> getAllFeeds() {
 
 		//return feedService.findAllFeeds().subList(0, 10);
 		
@@ -37,13 +37,13 @@ public class FeedController {
 	}
 	
 	@RequestMapping(value = "searchName/{name}", method = RequestMethod.GET)
-	public List<FeedModel> getFeedsByName(@PathVariable("name") String name) {
+	public List<Feed> getFeedsByName(@PathVariable("name") String name) {
 
 		//return feedService.findAllFeeds().subList(0, 10);
 		
 		System.out.println("A name is searched, searched name:" + name);
 		
-		List<FeedModel> feedsInludingGivenName = feedService.getFeedsByName(name);
+		List<Feed> feedsInludingGivenName = feedService.getFeedsByName(name);
 	
 		System.out.println("Founded feed count:" + feedsInludingGivenName.size());
 		
@@ -52,7 +52,7 @@ public class FeedController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public FeedModel getFeedModelById(@PathVariable("id") ObjectId id) {
+	public Feed getFeedModelById(@PathVariable("id") ObjectId id) {
 	  
 		return feedService.findBy_id(id);
 	}

@@ -2,41 +2,51 @@ package com.iyte.thesisproject.domain;
 
 import java.util.List;
 
-import com.iyte.thesisproject.enums.Shoots;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "BasketballPlayers")
 public class BasketballPlayer extends Player{
 
-	private BasketballPlayer posiiton;
-	private Shoots foot;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	public ObjectId _id;
+	
+	private BasketballPlayer positon;
 	private int totalScores;
 	private int totalAssists;
 	private int totalRebounds;
 	
-	public BasketballPlayer(String name, List<SocialMediaAccount> accounts, double salary, int matchCount,
-			int numberOfMatchWon, int numberOfMatchLost, BasketballPlayer posiiton, Shoots foot, int totalScores,
-			int totalAssists, int totalRebounds) {
-		super(name, accounts, salary, matchCount, numberOfMatchWon, numberOfMatchLost);
-		this.posiiton = posiiton;
-		this.foot = foot;
+	public BasketballPlayer(ObjectId _id, String name, String nationality, int age, double salary, 
+							int matchCount, int numberOfMatchWon, int numberOfMatchLost, 
+							BasketballPlayer positon, int totalScores, int totalAssists, int totalRebounds) {
+		
+		super(name, age, nationality, salary, matchCount, numberOfMatchWon, numberOfMatchLost);
+		this._id = _id;
+		this.positon = positon;
 		this.totalScores = totalScores;
 		this.totalAssists = totalAssists;
 		this.totalRebounds = totalRebounds;
 	}
 
-	public BasketballPlayer getPosiiton() {
-		return posiiton;
+	public String get_id() {
+		return _id.toHexString();
 	}
 
-	public void setPosiiton(BasketballPlayer posiiton) {
-		this.posiiton = posiiton;
+	public void set_id(ObjectId _id) {
+		this._id = _id;
+	}
+	
+	public BasketballPlayer getPositon() {
+		return positon;
 	}
 
-	public Shoots getFoot() {
-		return foot;
-	}
-
-	public void setFoot(Shoots foot) {
-		this.foot = foot;
+	public void setPositon(BasketballPlayer positon) {
+		this.positon = positon;
 	}
 
 	public int getTotalScores() {
@@ -62,12 +72,5 @@ public class BasketballPlayer extends Player{
 	public void setTotalRebounds(int totalRebounds) {
 		this.totalRebounds = totalRebounds;
 	}
-
-	@Override
-	public void getInfo() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	
 }
